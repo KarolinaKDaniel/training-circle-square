@@ -1,15 +1,5 @@
 using Training.CircleSquareGame.Api;
 
-public static class GameServiceInstance
-{
-    public static GameService Instance
-    {
-        get { return _instance ?? (_instance = new GameService()); }
-    }
-
-    private static GameService _instance;
-}
-
 public class GameService : IGameService
 {
     public Game Game { get; set; }

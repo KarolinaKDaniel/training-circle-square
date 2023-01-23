@@ -19,6 +19,9 @@ var hub = new Hub("http://localhost:5000/xohub");
 hub.connection.on("CurrentFieldValue", (fieldId, value) => {
     appState.oxFields[fieldId].update({value})
 })
+hub.connection.on("FieldIsFilled", (message) => {
+    appState.ExampleText.update({message})
+})
 
 // SignalR calls from backend go here
 // ----------------------------------
