@@ -14,6 +14,7 @@ builder.Services.AddCors(options =>
                 .SetIsOriginAllowed(s => true);
         });
 });
+builder.Services.AddSingleton<IGameService, GameService>();
 
 var app = builder.Build();
 app.UseCors();
