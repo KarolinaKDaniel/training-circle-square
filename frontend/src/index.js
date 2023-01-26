@@ -20,8 +20,8 @@ hub.connection.on("CurrentFieldValue", (fieldId, value) => {
     appState.oxFields[fieldId].update({value})
 })
 
-hub.connection.on("FieldIsFilled", (message) => {
-    appState.exampleText.update({message})
+hub.connection.on("FieldIsFilled", (value) => {
+    appState.exampleText.update({value})
 })
 
 // SignalR calls from backend go here
