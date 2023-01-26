@@ -3,8 +3,8 @@ import { mount, register, install } from 'riot'
 import Hub from './hub'
 import GameBoard from './components/game-board/game-board.riot'
 import OxField from './components/ox-field/ox-field.riot'
-import ExampleButton from './components/example-button/example-button.riot'
-import ExampleText from './components/example-text/example-text.riot'
+import TextDisplay from './components/text-display/text-display.riot'
+import NewGameButton from './components/new-game-button/new-game-button.riot'
 
 var appState = {
     oxFields: {}
@@ -21,7 +21,7 @@ hub.connection.on("CurrentFieldValue", (fieldId, value) => {
 })
 
 hub.connection.on("FieldIsFilled", (value) => {
-    appState.exampleText.update({value})
+    appState.textDisplay.update({value})
 })
 
 // SignalR calls from backend go here
@@ -38,8 +38,8 @@ install(function(component) {
 
 register('ox-field', OxField)
 register('game-board', GameBoard)
-register('example-button', ExampleButton)
-register('example-text', ExampleText)
+register('text-display', TextDisplay)
+register('new-game-button', NewGameButton)
 
 // RiotJs component registration happens here here
 // -----------------------------------------------

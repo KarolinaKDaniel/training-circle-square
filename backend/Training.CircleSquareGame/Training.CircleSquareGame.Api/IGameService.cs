@@ -1,12 +1,12 @@
-using Training.CircleSquareGame.Api;
+namespace Training.CircleSquareGame.Api;
 
-public interface IGameService
-{
-    public Game Game { get; set; }
+    public interface IGameService
+    {
+        public Game Game { get; }
 
-    void RunNewGame(int maxNumberOfWins);
+        void RunNewGame();
 
-    void MakeAMove(Player player, string fieldName);
+        void MakeAMove(Player player, string fieldName);
 
-    string GetFieldValue(string fieldName);
-}
+        string GetFieldValue(string fieldName);
+    }

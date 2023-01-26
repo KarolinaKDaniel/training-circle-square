@@ -11,6 +11,19 @@ public class XOHub : Hub
         GameService = gameService;
     }
 
+    public async Task StartNewGame()
+    {
+        var filledFields = GameService.Game.Board.GetAllFilledFields();
+        
+        GameService.RunNewGame();
+        
+        foreach (var filledField in filledFields)
+        {
+            await GetField(filledField);
+        }
+        
+    }
+    
     public async Task GetField(string fieldId)
     {
         await Clients.All.SendAsync("CurrentFieldValue", fieldId, "");
@@ -26,7 +39,7 @@ public class XOHub : Hub
         }
         else
         {
-            var message = $"Field {fieldId} is already filled";
+            const string message = "Field is already filled";
             await Clients.All.SendAsync("FieldIsFilled", message);
         }
     }

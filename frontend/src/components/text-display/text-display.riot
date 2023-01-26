@@ -1,0 +1,13 @@
+﻿<text-display>
+    <p>{ state.value }</p>
+    <script>
+        export default {
+            onMounted() {
+                this.appState.textDisplay = this
+                this.update({
+                    value: ''
+                })
+            }
+        }
+    </script>
+</text-display>

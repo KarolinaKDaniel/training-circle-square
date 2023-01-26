@@ -1,47 +1,49 @@
-using Training.CircleSquareGame.Api;
-
-public class GameService : IGameService
+namespace Training.CircleSquareGame.Api
 {
-    public Game Game { get; set; }
-
-    public GameService(int maxNumberOfWins = 3)
+    public class GameService : IGameService
     {
-        Game = new Game(maxNumberOfWins);
-    }
+        public Game Game { get; set; }
 
-    public void RunNewGame(int maxNumberOfWins = 3)
-    {
-        Game = new Game(maxNumberOfWins);
-    }
-
-    public void MakeAMove(Player player, string fieldName)
-    {
-        Game.Board.FillAField(player.PlayerType, fieldName);
-        
-        if (Game.Board.CheckIfPlayerWon(player.PlayerType))
+        public GameService(int maxNumberOfWins = 3)
         {
-             player.AddWin();
+            Game = new Game(maxNumberOfWins);
+        }
+
+        public void RunNewGame()
+        {
+            Game = new Game(3);
+        }
+
+        public void MakeAMove(Player player, string fieldName)
+        {
+            Game.Board.FillAField(player.PlayerType, fieldName);
+
+            if (Game.Board.CheckIfPlayerWon(player.PlayerType))
+            {
+                player.AddWin();
+
+            }
+
+            //
+            // if (Game.CheckIfWon(player))
+            // {
+            //     // DO STH
+            //     return;
+            // }
+            Game.ChangePlayer();
 
         }
-        //
-        // if (Game.CheckIfWon(player))
-        // {
-        //     // DO STH
-        //     return;
-        // }
-        Game.ChangePlayer();
 
-    }
+        public string? GetFieldValue(string fieldName)
+        {
+            if (Game.Board.IsFieldFilled(fieldName))
+                return null;
 
-    public string? GetFieldValue(string fieldName)
-    {
-        if (Game.Board.IsFieldFilled(fieldName))
-            return null;
+            var player = Game.GetPlayer(Game.CurrentPlayer);
 
-        var player = Game.GetPlayer(Game.CurrentPlayer);
+            MakeAMove(player, fieldName);
 
-        MakeAMove(player, fieldName);
-
-        return player.PlayerType == PlayerType.X ? "x" : "o";
+            return player.PlayerType == PlayerType.X ? "x" : "o";
+        }
     }
 }

@@ -1,9 +1,8 @@
-﻿
-namespace Training.CircleSquareGame.Api
+﻿namespace Training.CircleSquareGame.Api
 {
     public class Board
     {
-        public Dictionary<PlayerType, List<string>> filledFields { get; set; }
+        public Dictionary<PlayerType, List<string>> filledFields { get; }
 
         private readonly List<string>[] winningCombinations = { new() { "a1", "a2", "a3" }, new() { "b1", "b2", "b3" }, 
                                                                 new() { "c1", "c2", "c3" }, new() { "a1", "b1", "c1" }, 
@@ -33,10 +32,17 @@ namespace Training.CircleSquareGame.Api
 
         public bool IsFieldFilled(string field)
         {
-            var allFilledFields = new List<string>();
-            filledFields.Values.ToList().ForEach(x => allFilledFields.AddRange(x));
+            var allFilledFields = GetAllFilledFields();
 
             return allFilledFields.Contains(field);
+        }
+
+        public List<string> GetAllFilledFields()
+        {
+            var allFilledFields = new List<string>();
+            filledFields.Values.ToList().ForEach(x => allFilledFields.AddRange(x));
+            
+            return allFilledFields;
         }
     }
 

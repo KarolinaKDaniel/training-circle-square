@@ -1,0 +1,14 @@
+﻿<new-game-button>
+    <button class="button button-outline" onclick="{ () => newGame() }">Start New Game</button>
+    <script>
+        export default {
+            newGame() {
+                var message = "New Game Started!"
+                this.hub.invoke("StartNewGame");
+                this.appState.textDisplay.update({
+                    value: message
+                })
+            }
+        }
+    </script>
+</new-game-button>
