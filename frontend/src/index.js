@@ -8,7 +8,7 @@ import ExampleText from './components/example-text/example-text.riot'
 
 var appState = {
     oxFields: {}
-};
+    };
 
 // SignalR
 var hub = new Hub("http://localhost:5000/xohub");
@@ -19,8 +19,9 @@ var hub = new Hub("http://localhost:5000/xohub");
 hub.connection.on("CurrentFieldValue", (fieldId, value) => {
     appState.oxFields[fieldId].update({value})
 })
+
 hub.connection.on("FieldIsFilled", (message) => {
-    appState.ExampleText.update({message})
+    appState.exampleText.update({message})
 })
 
 // SignalR calls from backend go here
